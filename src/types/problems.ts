@@ -19,3 +19,8 @@ export interface IUpdateProblemTReqBody {
     difficulty?: "easy" | "medium" | "hard",
     testcases?: ITestcase[],
 }
+
+export interface IResProblem{
+    title:string,
+    description:string
+}

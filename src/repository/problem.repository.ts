@@ -1,10 +1,11 @@
-import type { IProblemTReqBody, IUpdateProblemTReqBody } from "../types/problems";
+import type { IProblem } from "../models/problems.model";
+import type { IProblemTReqBody, IResProblem, IUpdateProblemTReqBody } from "../types/problems";
 
 
-export class ProblemRepository{
-    createProblem(args:IProblemTReqBody){}
-    fetchProblem(pid:string){}
-    fetchAllProblem(){}
-    updateProblem(args:IUpdateProblemTReqBody){}
-    deleteProblem(pid:string){}
+export interface ProblemRepository{
+    createProblem(args:IProblemTReqBody):Promise<IResProblem>
+    fetchProblem(pid:string):Promise<IProblem>
+    fetchAllProblem():Promise<IProblem[]>
+    updateProblem(args:IUpdateProblemTReqBody):Promise<Partial<IProblem>>
+    deleteProblem(pid:string):Promise<void>
 }
