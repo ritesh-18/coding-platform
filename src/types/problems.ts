@@ -14,6 +14,7 @@ export interface IProblemTReqBody {
 }
 
 export interface IUpdateProblemTReqBody {
+   
     title?: string,
     description?: string,
     difficulty?: "easy" | "medium" | "hard",

@@ -1,31 +1,16 @@
 import express from 'express'
 import { Problem } from '../models/problems.model';
 import { ProblemController } from '../controllers/problem.controller';
+import { ProblemRepository } from '../repository/problem.repository';
+import { ProblemService } from '../services/problem.service';
 
 
 export const problemRouter=express.Router();
-
-
-const problemcontroller=new ProblemController();
-
-problemRouter.post("/",async(req, res)=>{
-    try {
-    const bodydata=req.body;
-    const problem1=new Problem(bodydata)
-    await problem1.save()
-    res.status(201).json(
-        {
-            msg:"problem created !!",
-            success:true,
-            data:problem1
-        }
-    )
-    } catch (error) {
-        res.status(500).json({
-            successs:false,
-            error
-        })
-        
-    }
-    
-})
+const repo=new ProblemRepository()
+const service=new ProblemService(repo)
+const problemcontroller=new ProblemController(service);
+problemRouter.post("/" , problemcontroller.createProblem.bind(problemcontroller))
+problemRouter.get("/:id" , problemcontroller.fetchProblem.bind(problemcontroller))
+problemRouter.get("/" , problemcontroller.fetchAllProblem.bind(problemcontroller))
+problemRouter.delete('/:id', problemcontroller.deleteProblem.bind(problemcontroller))
+problemRouter.patch('/:id', problemcontroller.updateProblem.bind(problemcontroller))
