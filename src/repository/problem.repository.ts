@@ -8,13 +8,13 @@ export interface IProblemRepository {
     fetchProblem(pid: string): Promise<IProblem | null>
     fetchAllProblem(): Promise<Partial<IProblem>[] | []>
     updateProblem(id: string, args: IUpdateProblemTReqBody): Promise<Partial<IProblem> | null>
-    deleteProblem(pid: string): Promise<null>
+    deleteProblem(pid: string): Promise<IProblem | null>
 }
 
 
 export class ProblemRepository implements IProblemRepository {
     async createProblem(args: IProblemTReqBody): Promise<IResProblem> {
-        const problem = new Problem(args)
+     const problem = new Problem(args)
         return await problem.save()
     }
     async fetchAllProblem(): Promise<Partial<IProblem>[] | []> {
@@ -28,10 +28,10 @@ export class ProblemRepository implements IProblemRepository {
         return await Problem.findOneAndUpdate(
             { _id: id },
             { $set: args },
-            { return: true } // Returns the updated document instead of the old one
+            { new: true, runValidators: true } // Returns the updated document instead of the old one
         );
     }
-    async deleteProblem(id: string): Promise<null> {
+    async deleteProblem(id: string): Promise<IProblem | null> {
         return await Problem.findOneAndDelete({ _id: id })
     }
 
