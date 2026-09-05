@@ -11,7 +11,7 @@ app.use(express.json())
 app.use(cors({
     "origin":"*"
 }))
-app.use(router)
+app.use('/api/v1',router)
 
 app.listen(serverConfig.PORT , async()=>{
     await ConnectDb()
