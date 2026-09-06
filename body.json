@@ -1,0 +1,5 @@
+{
+  "pid": "6a9d5cb5d2522bd1589ebddb",
+  "code": "const lines = require('fs').readFileSync(0, 'utf8').split('\\n');\nconst nums = lines[0].trim().split(/\\s+/).map(Number);\nconst target = Number(lines[1].trim());\nconst seen = new Map();\nfor (let i = 0; i < nums.length; i++) {\n  const need = target - nums[i];\n  if (seen.has(need)) { console.log(seen.get(need) + ' ' + i); break; }\n  seen.set(nums[i], i);\n}\n",
+  "language": "javascript"
+}

@@ -1,5 +1,5 @@
 import Docker from 'dockerode';
-import { JSImage, PythonImage } from '../constant/images.constant';
+import { JavaScriptImage, PythonImage } from '../constant/images.constant';
 
 export async function pullImage(imageName: string) {
     const docker = new Docker();
@@ -23,7 +23,7 @@ export async function pullImage(imageName: string) {
 }
 
 export async function getAllImages(){
-    const images=[JSImage, PythonImage]
+    const images=[JavaScriptImage, PythonImage]
     try {
         const promises = images.map(pullImage);
         return await Promise.all(promises);

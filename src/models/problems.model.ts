@@ -16,7 +16,7 @@ enum Language{
     CPP='cpp',
     JAVA='java',
     PYTHON='python',
-    JAVASCRIPT='js'
+    JAVASCRIPT='javascript'
 }
 
 export interface ISubmissionProblem extends Document {

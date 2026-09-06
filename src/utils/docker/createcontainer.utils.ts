@@ -15,7 +15,10 @@ export async function createContainer(config:ContainerConfig){
         const container = await docker.createContainer({
           Image:config.ImageName,
           Cmd:config.Command,
-          Tty:false,
+          // Tty:true gives a raw output stream. With Tty:false Docker prefixes
+          // every frame with an 8-byte multiplexing header, which corrupts
+          // exact-match comparison against expected testcase output.
+          Tty:true,
           AttachStdin:true,
           AttachStdout:true,
           AttachStderr:true,
