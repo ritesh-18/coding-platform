@@ -14,7 +14,7 @@ export class SubmissionService {
          */
         //fetch the prblem
         if (!args.pid) {
-            throw new BadRequestError("Prblem id required!!!")
+            throw new BadRequestError("Problem id required!!!")
         }
         const problemData = await fetchProblemById(args.pid)
         if (!problemData) {
@@ -25,6 +25,8 @@ export class SubmissionService {
         const jobId = await addSubmission({
             sid: problem.pid,
             data: {
+                // the submission's own id — needed to write the verdict back
+                submissionId: String(problem._id),
                 pid: problem.pid,
                 submittedCode: problem.code,
                 language: problem.language,
@@ -48,7 +50,7 @@ export class SubmissionService {
     async updateProblem(id: string, status: SubmissionStaus) {
         // only sanitize description when it is actually being updated,
         // otherwise a partial update would wipe the stored description
-        return
+        return await this.problemrepo.updateProblemStatus(id, status)
     }
     async deleteProblem(id: string) {
         const problem = await this.problemrepo.deleteProblem(id)

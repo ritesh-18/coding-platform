@@ -12,6 +12,7 @@ export interface ISubmissionRepository {
 export class SubmissionRepository implements ISubmissionRepository {
     async createProblem(args: Partial<ISubmissionProblem>): Promise<ISubmissionProblem> {
      const problem = new Submission(args)
+     console.log("problem created in repo", args)
         return await problem.save()
     }
     async fetchAllProblem(): Promise<Partial<ISubmissionProblem>[] | []> {

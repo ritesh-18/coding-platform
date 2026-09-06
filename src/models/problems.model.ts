@@ -25,20 +25,22 @@ export interface ISubmissionProblem extends Document {
     status:SubmissionStaus,
     language:string,
     createdAt: Date,
-    updatedAt: Date
+    updatedAt: Date,
 }
 
 
 const SubmissionSchema = new mongoose.Schema<ISubmissionProblem>({
     pid: { type: String, required: true },
     code: { type: String, required: true },
+   
     status: {
         type: String,
         // The enum validator restricts the value to these options
         enum:Object.values(SubmissionStaus),
         default:SubmissionStaus.PENDING,
     },
-    language:{type:String , required:true , enum:Object.values(Language)}
+    language:{type:String , required:true , enum:Object.values(Language)},
+
 },{timestamps:true})
 
 

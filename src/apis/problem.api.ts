@@ -33,3 +33,13 @@ export async function fetchProblemById(id: string): Promise<IProblem | null> {
     }
 
 }
+export async function updateProblemStatus(id: string, status: string): Promise<boolean> {
+    try {
+        const res: AxiosResponse<{ success: boolean, message: string }> = await axios.patch(`${serverConfig.PROBLEM_API}/problems/${id}`, { status })   
+    }
+    catch (error) {
+        console.log("Something went wrong while updating problem status")
+        return false;
+    }
+    return true;
+}

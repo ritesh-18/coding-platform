@@ -6,7 +6,7 @@ import { SubmissionService } from '../services/submission.service';
 
 export const submissionRouter=express.Router();
 const repo=new SubmissionRepository()
-const service=new SubmissionService(repo)
+export const service=new SubmissionService(repo)
 const problemcontroller=new SubmissionController(service);
 submissionRouter.post("/" , problemcontroller.createProblem.bind(problemcontroller))
 submissionRouter.get("/:id" , problemcontroller.fetchProblem.bind(problemcontroller))
